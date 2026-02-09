@@ -10,8 +10,8 @@ import requests
 SEARCH_URL = "https://search.maven.org/solrsearch/select"
 MAVEN_NS = "http://maven.apache.org/POM/4.0.0"
 
-VERSION = "1.0.0"
-VERSION_DATE = "2026-02-08"
+VERSION = "1.0.1"
+VERSION_DATE = "2026-02-09"
 
 JPM_DIR = ".jpm"
 JPROJECT_FILE = os.path.join(JPM_DIR, "jproject.json")

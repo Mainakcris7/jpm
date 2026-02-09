@@ -14,9 +14,8 @@
 A tiny, focused CLI to **create, manage, build, and run Java projects without an IDE**.  
 Fast, repeatable, and simple — perfect for quick prototypes, CI/CD scripts, and learning Java.
 
-**Version:** `1.0.0`  
-**Release date:** `2026-02-08`
-
+**Version:** `1.0.1`  
+**Release date:** `2026-02-09`
 
 ## ✨ What is JPM?
 
@@ -44,7 +43,8 @@ cd "jpm"
 ```
 
 #### 2️⃣ Install globally
-Copy `dist/jpm.exe` (or `jpm` binary) to a folder in your PATH. 
+
+Copy `dist/jpm.exe` (or `jpm` binary) to a folder in your PATH.
 
 For example, on Windows:
 Copy `dist/jpm.exe` to `C:\Program Files\jpm\bin\jpm.exe` and add `C:\Program Files\jpm\bin\` to your system PATH.
@@ -52,31 +52,59 @@ Copy `dist/jpm.exe` to `C:\Program Files\jpm\bin\jpm.exe` and add `C:\Program Fi
 🌟 Note: This repoistory already includes a pre-built `jpm.exe` in the `dist` folder for convenience, you can build your own version if needed, following the steps below.
 
 #### 3️⃣ Build JPM (Optional)
+
 1. Create a virtual environment and activate it:
+
 ```powershell
 python -m venv venv
 ```
+
 2. Activate the virtual environment:
+
+- On Windows:
+
 ```powershell
 venv\Scripts\activate
 ```
+
+- On macOS/Linux:
+
+```bash
+source venv/bin/activate
+```
+
 3. Install dependencies
+
 ```powershell
 pip install -r requirements.txt
 ```
+
 4. Build the executable using PyInstaller:
+
+- On Windows:
+
 ```powershell
 pyinstaller --onefile --add-data "mvnw.cmd;." --add-data "mvnw;." --add-data ".mvn;.mvn" jpm.py
 ```
+
+- On macOS/Linux:
+
+```bash
+pyinstaller --onefile --add-data "mvnw:." --add-data "mvnw.cmd:." --add-data ".mvn:.mvn" jpm.py
+```
+
 5. The executable will be located in the `dist` folder as `jpm.exe` (or `jpm` on macOS/Linux).
 
 6. Follow step 2 to copy the built executable to a folder in your PATH.
 
 #### 4️⃣ Verify installation
+
 ```powershell
 jpm --version
 ```
+
 You should see:
+
 ```powershell
 📦 Java Package Manager (JPM) Version: "1.0.0" (2026-02-08)
 ☕ Java Runtime: java version "21.0.6" 2025-01-21 LTS
@@ -84,16 +112,20 @@ You should see:
 ```
 
 ## ⚙️ One-Time Setup
+
 Run the `setup` command once after installation.
 
 ```powershell
 jpm setup
 ```
+
 What it does:
+
 - Verifies Java installation
 - Ensures Maven Wrapper is available
 
 ## 🚀 Quick Start
+
 ```
 jpm setup
 jpm init
@@ -101,19 +133,22 @@ cd <artifact_id>
 jpm run
 ```
 
-
 ## 🧰 Commands
+
 All commands must be run inside a project directory (where pom.xml exists).
 
 ##### 1. `jpm init` - Create a new project interactively.
+
 ```
 jpm init
 ```
+
 Choose:
 `> ☕ Standard Java Project`
 `> 🍃 Spring Boot Project`
 
 Output:
+
 ```
 ✨ Project created: demo
 👉 cd demo && jpm run
@@ -126,12 +161,14 @@ jpm install com.google.code.gson:gson:2.10.1
 ```
 
 **Accepted formats:**
+
 - `group:artifact:version` (e.g., `com.google.code.gson:gson:2.10.1`)
 - `group:artifact` (e.g., `com.google.code.gson:gson` - latest version will be used)
 - `artifact` search (e.g., `caffeine`)
 - Spring starter aliases (e.g., `web`, `data-jpa`, `security`)
 
 **Output:**
+
 ```
 🔍 Searching Maven Central for 'com.google.code.gson:gson:2.10.1'...
 ✅ Added dependency to pom.xml
@@ -145,6 +182,7 @@ jpm uninstall gson
 ```
 
 **Output:**
+
 ```
 🗑️  Uninstalling 'gson'...
 ✅ Dependency removed from pom.xml
@@ -156,9 +194,10 @@ jpm uninstall gson
 jpm run
 ```
 
-*Spring Boot projects use `spring-boot:run`*
+_Spring Boot projects use `spring-boot:run`_
 
 **Output:**
+
 ```
 🛠️  Compiling and executing your code ...
 Hello, World!
@@ -171,6 +210,7 @@ jpm build
 ```
 
 **Output:**
+
 ```
 🏗️  Building project...
 ✅ Build complete.
@@ -183,6 +223,7 @@ jpm test
 ```
 
 **Output:**
+
 ```
 🧪 Running tests...
 ✅ All tests passed.
@@ -205,7 +246,9 @@ jpm sync
 ```powershell
 jpm --version
 ```
+
 **Output:**
+
 ```
 📦 Java Package Manager (JPM) Version: "1.0.0" (2026-02-08
 ☕ Java Runtime: java version "21.0.6" 2025-01-21 LTS)
@@ -219,6 +262,7 @@ JPM stores project metadata in:
 `.jpm/jproject.json`
 
 **Format** (For Spring Boot projects, starter dependencies are listed under `starterDependencies`):
+
 ```json
 {
   "group_id": "com.example",
@@ -228,11 +272,11 @@ JPM stores project metadata in:
   "projectType": "spring-boot",
   "starterDependencies": ["web", "data-jpa"],
   "dependencies": [
-	{
-	  "group_id": "com.github.ben-manes.caffeine",
-	  "artifact_id": "caffeine",
-	  "version": "3.1.8"
-	}
+    {
+      "group_id": "com.github.ben-manes.caffeine",
+      "artifact_id": "caffeine",
+      "version": "3.1.8"
+    }
   ]
 }
 ```
@@ -242,7 +286,9 @@ This metadata is used to manage dependencies, project configuration, determine p
 **⚠️ Do not edit it manually, if not necessary.**
 
 ## 🤝 Contributing
+
 JPM is under active development.
+
 - Found a bug?
 - Have a feature idea?
 - Want to improve docs
@@ -250,5 +296,6 @@ JPM is under active development.
 Pull requests and issues are welcome 🙌
 
 ## 📬 Contact
+
 Feel free to reach out for support, feedback, or just to say hi!
 Email: mainakcr72002@gmail.com

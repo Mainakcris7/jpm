@@ -508,7 +508,7 @@ def cmd_build(args):
     """
     print("🏗️  Building project...")
     try:
-        subprocess.run([str(MAVEN_WRAPPER_PATH), "package",
+        subprocess.run([str(MAVEN_WRAPPER_PATH), "clean", "package",
                        "-q"], check=True, shell=True)
         print("✅ Project built successfully.")
     except subprocess.CalledProcessError:
